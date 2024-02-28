@@ -1,4 +1,4 @@
-import web3 from './web3';
+import { web3 } from '../components/ButtonWeb3';
 import Voting from './build/Voting.json';
 
 const voting = (address) => {

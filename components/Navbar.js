@@ -14,14 +14,16 @@ export default class MenuExampleVerticalSecondary extends Component {
         <div>
         <Menu pointing>
           <MenuItem
-            name='home'
-            active={activeItem === 'home'}
+            name='Cases'
+            active={activeItem === 'cases'}
             onClick={this.handleItemClick}
+            link href="/"
           />
           <MenuItem
-            name='messages'
-            active={activeItem === 'messages'}
+            name='Create Case'
+            active={activeItem === 'create case'}
             onClick={this.handleItemClick}
+            link href="/createcase"
           />
           <MenuItem
             name='friends'

@@ -1,15 +1,18 @@
-'use client'
-import { Container } from 'semantic-ui-react'
-import Navbar from '../components/Navbar'
-import 'semantic-ui-css/semantic.min.css'
+'use client';
+import WalletButton from "../components/ButtonWeb3";
+import Navbar from "../components/Navbar";
+import { Container } from "semantic-ui-react";
 
-const Layout = (props) => {
+export default function RootLayout({ children }) {
   return (
-    <Container fluid={false}>
-      <Navbar />
-      {props.children}
-    </Container>
-  )
+    <html lang="en">
+      <body>
+        <Container fluid={false}>
+        <Navbar/>
+        <WalletButton/>
+        {children}
+        </Container>
+        </body>
+    </html>
+  );
 }
-
-export default Layout;
