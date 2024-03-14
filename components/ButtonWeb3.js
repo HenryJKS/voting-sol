@@ -69,7 +69,7 @@ class WalletButton extends Component {
           onClick={this.connectWallet}
           loading={this.state.loading}
           floated="right"
-          style={{ marginTop: "1%" }}
+          style={{ marginTop: "1%", marginBottom: "1%"}}
         />
     );
   }

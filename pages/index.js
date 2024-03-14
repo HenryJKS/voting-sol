@@ -24,7 +24,6 @@ const Home = ({ cases }) => {
         loadContractDetails();
     }, [cases]);
 
-    console.log(descriptionCases)
     const renderCases = () => {
         const items = descriptionCases.map(({ address, description, finished }) => {
             return {
