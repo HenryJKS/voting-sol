@@ -74,7 +74,7 @@ const Case = ({address}) => {
             <Button color='green' onClick={onApprove}>Approve</Button>
             <Button color='red' onClick={onDeny}>Reject</Button>
             <Divider horizontal>Finish Case</Divider>
-            <Button color='blue' onClick={onFinishCase}>Finish Case</Button>
+            <Button color='blue' onClick={onFinishCase} disabled={finished}>Finish Case</Button>
         </Layout>
     );
 }
