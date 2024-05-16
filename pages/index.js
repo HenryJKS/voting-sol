@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import factoryVoting from "../ethereum/factoryVoting";
-import Voting from "../ethereum/voting";
+import Voting from "@/ethereum/voting";
 import { Card, Button, Container } from "semantic-ui-react";
 import Layout from "../components/Layout";
 

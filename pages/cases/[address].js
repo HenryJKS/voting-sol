@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react'
 import { web3 } from '../../components/ButtonWeb3'
 import Layout from "../../components/Layout";
-import voting from "../../ethereum/voting"
+import voting from "@/ethereum/voting"
 import { Table, TableRow, TableHeader, TableCell, TableBody, TableHeaderCell, Button, Divider } from 'semantic-ui-react';
 
 const Case = ({address}) => {
