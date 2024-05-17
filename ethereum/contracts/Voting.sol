@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: MIT
 pragma solidity > 0.8.20;
 
-// Sistema de votação
-// Regras: caso o numero de votos aprovador for a metade ou maior de todos os votos o caso, será aprovado
-// cada voting será somente um caso
-// criação de uma factory de Voting
+// System voting
+// Rules: if the number of approving votes is half or more of all the votes, the case will be approved
+// each voting will be only one case
+// creation of a Voting factory
 
 contract FactoryVoting {
     address payable[] public votings;
@@ -54,14 +54,12 @@ contract Voting {
         require(!c.notApprovers[msg.sender], "you already voting");
         _;
     }
-
-    // aceitar caso
+    
     function votingAcceptCase() public timeCase alreadyVoting{
         c.approvers[msg.sender] = true;
         c.countAccept++;
     }
 
-    // nao aceitar caso
     function votingDenyCase() public timeCase alreadyVoting{
         require(!c.approvers[msg.sender], "you already voting");
         require(!c.notApprovers[msg.sender], "you already voting");

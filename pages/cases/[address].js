@@ -90,8 +90,8 @@ const Case = ({ address }) => {
         <TableHeader>
           <TableRow textAlign="center">
             <TableHeaderCell>Case Name</TableHeaderCell>
-            <TableHeaderCell>Approve Count</TableHeaderCell>
-            <TableHeaderCell>Reject Count</TableHeaderCell>
+            <TableHeaderCell>Approvers</TableHeaderCell>
+            <TableHeaderCell>Rejecters</TableHeaderCell>
             <TableHeaderCell>Finished</TableHeaderCell>
             <TableHeaderCell>Approve</TableHeaderCell>
           </TableRow>
