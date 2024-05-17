@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity >0.8.9;
+pragma solidity > 0.8.20;
 
 // Sistema de votação
 // Regras: caso o numero de votos aprovador for a metade ou maior de todos os votos o caso, será aprovado
@@ -9,8 +9,8 @@ pragma solidity >0.8.9;
 contract FactoryVoting {
     address payable[] public votings;
 
-    function createVoting(string memory nameCase) public {
-        address newVoting = address(new Voting(nameCase));
+    function createVoting(string memory nameCase, string memory description) public {
+        address newVoting = address(new Voting(nameCase, description));
         votings.push(payable(newVoting));
     }
 
@@ -26,6 +26,7 @@ contract FactoryVoting {
 contract Voting {
     struct Case {
         string nameCase;
+        string description;
         uint256 countAccept;
         uint256 countNotAccept;
         bool approve;
@@ -34,12 +35,12 @@ contract Voting {
         mapping(address => bool) notApprovers;
     }
 
-    Case[] public c;
+    Case public c;
     uint256 private timeMax;
 
-    constructor(string memory _nameCase) {
-        Case storage newCase = c.push();
-        newCase.nameCase = _nameCase;
+    constructor(string memory _nameCase, string memory _description) {
+        c.nameCase = _nameCase;
+        c.description = _description;
         timeMax = block.timestamp + 2 minutes;
     }
 
@@ -48,44 +49,36 @@ contract Voting {
         _;
     }
 
-    // criar caso
-    function createCaso(string memory _nameCase) public {
-        Case storage newCase = c.push();
-        newCase.nameCase = _nameCase;
-        newCase.countAccept = 0;
-        newCase.countNotAccept = 0;
-        newCase.approve = false;
-        newCase.finished = false;
+    modifier alreadyVoting() {
+        require(!c.approvers[msg.sender], "you already voting");
+        require(!c.notApprovers[msg.sender], "you already voting");
+        _;
     }
 
     // aceitar caso
-    function votingAcceptCase(uint256 index) public timeCase {
-        Case storage newVotingCase = c[index];
-        require(!newVotingCase.approvers[msg.sender], "you already voting");
-        require(!newVotingCase.notApprovers[msg.sender], "you already voting");
-        newVotingCase.approvers[msg.sender] = true;
-        newVotingCase.countAccept++;
+    function votingAcceptCase() public timeCase alreadyVoting{
+        c.approvers[msg.sender] = true;
+        c.countAccept++;
     }
 
     // nao aceitar caso
-    function votingDenyCase(uint256 index) public timeCase {
-        Case storage newVotingCase = c[index];
-        require(!newVotingCase.approvers[msg.sender], "you already voting");
-        require(!newVotingCase.notApprovers[msg.sender], "you already voting");
-        newVotingCase.notApprovers[msg.sender] = true;
-        newVotingCase.countNotAccept++;
+    function votingDenyCase() public timeCase alreadyVoting{
+        require(!c.approvers[msg.sender], "you already voting");
+        require(!c.notApprovers[msg.sender], "you already voting");
+        c.notApprovers[msg.sender] = true;
+        c.countNotAccept++;
     }
 
-    function approveCase(uint256 index) public {
+    function approveCase() public {
         require(block.timestamp > timeMax, "Case in progress");
-        Case storage verifyCase = c[index];
+        require(c.finished != true, "Case already done");
 
-        if (verifyCase.countAccept >= verifyCase.countNotAccept) {
-            verifyCase.approve = true;
-            verifyCase.finished = true;
+        if (c.countAccept >= c.countNotAccept) {
+            c.approve = true;
+            c.finished = true;
         } else {
-            verifyCase.approve = false;
-            verifyCase.finished = true;
+            c.approve = false;
+            c.finished = true;
         }
     }
 }

@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@nextui-org/react": "^2.2.9",
+    "@nextui-org/spinner": "^2.0.28",
     "@truffle/hdwallet-provider": "^2.1.15",
     "dotenv": "^16.4.5",
     "fs-extra": "^11.2.0",

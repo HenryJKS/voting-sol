@@ -12,7 +12,7 @@ const Home = ({ cases }) => {
         const loadContractDetails = async () => {
             const details = await Promise.all(cases.map(async address => {
                 const voting = Voting(address);
-                const details = await voting.methods.c(0).call();
+                const details = await voting.methods.c().call();
                 return {
                     address,
                     description: details[0],

@@ -1,6 +1,7 @@
 const HDWalletProvider = require('@truffle/hdwallet-provider')
 const Web3 = require('web3')
 const compiledFactory = require('./build/FactoryVoting.json')
+
 require("dotenv").config({
     path: "../.env.local",
 });
@@ -23,7 +24,7 @@ const deploy = async () => {
       .deploy({
         data: compiledFactory.evm.bytecode.object,
       })
-      .send({ gas: "3000000", from: accounts[0]})
+      .send({ gas: "5000000", from: accounts[0]})
       .catch((err) => console.error(err));
   
     console.log("Contract deployed to", result.options.address);
